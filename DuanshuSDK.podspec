@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'http://www.duanshu.com'
   s.summary      = 'dingdone'
 
-  s.source       = { :git => "https://git.hoge.cn/ios.venders/DuanshuSDK.git"}
+  s.source       = { :git => "https://github.com/hogeclould/DuanshuH5MobileSDK-iOS.git"}
 
   s.vendored_frameworks = 'Framework/DuanshuSDK.framework'
 
