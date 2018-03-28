@@ -1,0 +1,6 @@
+framework module DuanshuSDK {
+  umbrella header "DuanshuSDK.h"
+
+  export *
+  module * { export * }
+}
