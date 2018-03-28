@@ -24,12 +24,20 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    // demo 提供了代理默认实现， 可供参考
     self.defaultDelegate = [[DSUWebViewDefaultDelegate alloc] init];
     
     self.webView = [[ExampleWebView alloc] init];
+    
+    // 在注册UIWebView代理时，必须使用此方法
     [self.webView registerBridge:self];
+    
+    // 用户可重写的API
     self.webView.dsu_delegate = self.defaultDelegate;
+    
+    // 开启日志
     self.webView.logEnabled = YES;
+    
     [self.view addSubview:self.webView];
     
     NSURL *mainUrl = [NSBundle mainBundle].bundleURL;

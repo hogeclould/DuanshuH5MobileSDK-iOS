@@ -19,8 +19,26 @@
 pod 'WebViewJavascriptBridge', '6.0'
 ```
 
-## SDK使用以及API
+## SDK使用Example
 用户需要使用SDK提供`DSUWebview`加载短书H5页面， 并实现`DSUWebViewDelegate`代理相应的方法，详细使用参见`DuanshuSDK Demo`
+
+```objc
+// demo 提供了代理默认实现， 可供参考
+    self.defaultDelegate = [[DSUWebViewDefaultDelegate alloc] init];
+
+    self.webView = [[ExampleWebView alloc] init];
+
+    // 在注册UIWebView代理时，必须使用此方法
+    [self.webView registerBridge:self];
+
+    // 用户可重写的API
+    self.webView.dsu_delegate = self.defaultDelegate;
+
+    // 开启日志
+    self.webView.logEnabled = YES;
+```
+
+## SDK代理`DSUWebViewDelegate`API
 ```objc
 @protocol DSUWebViewDelegate <NSObject>
 
