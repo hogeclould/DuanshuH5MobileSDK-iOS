@@ -11,7 +11,7 @@
  pod 'DuanshuSDK', '1.0'
 ```
 
-*** 安转注意事项***
+***安转注意事项***
 
 > `DuanshuSDK.framework`中js与webview通信，使用了第三方库[WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge), 因此用户在使用的时候需要依赖'WebViewJavascriptBridge'
 
@@ -163,7 +163,7 @@ pod 'WebViewJavascriptBridge', '6.0'
 - Demo中图片预览功能使用了第三方库[MWPhotoBrowser](https://github.com/mwaterfall/MWPhotoBrowser)
 
 ## H5 API 文档
-- [H5 API 文档](.短书JSSDK API 说明.md)
+- [H5 API 文档](https://github.com/hogeclould/DuanshuH5MobileSDK-iOS/blob/master/%E7%9F%AD%E4%B9%A6JSSDK%20API%20%E8%AF%B4%E6%98%8E.md)
 
 ## 作者
 - [短书](http://my.duanshu.com/)
