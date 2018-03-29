@@ -80,7 +80,7 @@
 - (void)stopWithURL:(NSURL *)url completeBlock:(DSUCallbackBlock)complete{
     [self pause];
     [self clear];
-    self.completeBlock(0, @"停止播放", @{@"status":@1, @"url":self.currentUrl.absoluteString});
+    self.completeBlock(0, @"停止播放", @{@"status":@1, @"url":self.currentUrl.absoluteString ?:@""});
     
 }
 
@@ -167,14 +167,14 @@
                 NSLog(@"加载失败");
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     
-                    if(self.completeBlock){
+                    if(wself.completeBlock){
                         
                         
                         NSDictionary *userInfo = @{@"status":@0,
-                                                   @"url":self.currentUrl.absoluteString
+                                                   @"url":self.currentUrl.absoluteString?:@""
                                                    };
                         
-                        self.completeBlock(1, @"资源加载失败", userInfo);
+                        wself.completeBlock(1, @"资源加载失败", userInfo);
                     }
                 });
                 
@@ -281,8 +281,8 @@
         NSTimeInterval currentTime = CMTimeGetSeconds(time);
         NSTimeInterval duration = CMTimeGetSeconds(wself.player.currentItem.duration);
         
-        if (self.progressBlock) {
-            self.progressBlock(currentTime, duration, wself.currentUrl.absoluteString);
+        if (wself.progressBlock) {
+            wself.progressBlock(currentTime, duration, wself.currentUrl.absoluteString?:@"");
         }
         
     };
@@ -308,7 +308,7 @@
     void (^callback)(NSNotification *note) = ^(NSNotification *notification) {
         
         if (wself.endBlock) {
-            wself.endBlock(0, @"播放完成", @{@"status":@1, @"url":wself.currentUrl.absoluteString});
+            wself.endBlock(0, @"播放完成", @{@"status":@1, @"url":wself.currentUrl.absoluteString ?: @""});
         }
         
         
@@ -365,12 +365,12 @@
 
             [self play];
             if(self.completeBlock){
-                self.completeBlock(0, @"开始播放", @{@"status":@1, @"url":self.currentUrl.absoluteString});
+                self.completeBlock(0, @"开始播放", @{@"status":@1, @"url":self.currentUrl.absoluteString?:@""});
             }
             
         } else {
             if(self.completeBlock){
-                self.completeBlock(1, @"播放失败", @{@"status":@0, @"url":self.currentUrl.absoluteString});
+                self.completeBlock(1, @"播放失败", @{@"status":@0, @"url":self.currentUrl.absoluteString?:@""});
             }
         }
     }
