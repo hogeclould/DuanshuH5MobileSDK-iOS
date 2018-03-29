@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ExampleViewController : UIViewController
-
+@property (nonatomic, copy) NSURL *contentURL;
 @end

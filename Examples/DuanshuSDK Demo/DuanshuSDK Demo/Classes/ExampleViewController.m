@@ -9,6 +9,7 @@
 #import "ExampleViewController.h"
 #import "ExampleWebView.h"
 #import "DSUWebViewDefaultDelegate.h"
+#import "DSUScanViewController.h"
 
 @interface ExampleViewController ()<UIWebViewDelegate, DSUWebViewDelegate>
 @property (nonatomic, strong) ExampleWebView *webView;
@@ -19,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"二维码" style:UIBarButtonItemStylePlain target:self action: @selector(scan)];
     
     self.navigationItem.title = @"短书H5-SDK Demo";
     
@@ -40,12 +43,18 @@
     
     [self.view addSubview:self.webView];
     
-    NSURL *mainUrl = [NSBundle mainBundle].bundleURL;
-    NSURL *url = [NSURL fileURLWithPath:@"JS_Sdk_files/JS_Sdk.htm" relativeToURL:mainUrl];
+    if(self.contentURL == nil){
+        NSURL *mainUrl = [NSBundle mainBundle].bundleURL;
+        NSURL *url = [NSURL fileURLWithPath:@"JS_Sdk_files/JS_Sdk.htm" relativeToURL:mainUrl];
+        
+        NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+        
+        [self.webView loadHTMLString:htmlString baseURL:mainUrl];
+    }else{
+        [self.webView loadRequest:[NSURLRequest requestWithURL:self.contentURL]];
+    }
     
-    NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-
-    [self.webView loadHTMLString:htmlString baseURL:mainUrl];
+    
 }
 
 - (void)viewWillLayoutSubviews{
@@ -58,6 +67,13 @@
     
 }
 
+- (void)scan{
+    
+    DSUScanViewController *vc = [[DSUScanViewController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:NO];
+    
+}
 
 
 #pragma mark -

@@ -13,6 +13,7 @@
 		4F4F1E6F2069E387001BCB50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F1E6E2069E387001BCB50 /* Assets.xcassets */; };
 		4F4F1E722069E387001BCB50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F1E702069E387001BCB50 /* LaunchScreen.storyboard */; };
 		4F4F1E752069E387001BCB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F1E742069E387001BCB50 /* main.m */; };
+		4F65FD1A206CDA8300175411 /* DSUScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F65FD19206CDA8300175411 /* DSUScanViewController.m */; };
 		4FAB6DCF2069E41E0039A867 /* image_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4FAB6DC02069E41E0039A867 /* image_01.jpg */; };
 		4FAB6DD02069E41E0039A867 /* image_02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4FAB6DC12069E41E0039A867 /* image_02.jpg */; };
 		4FAB6DD12069E41E0039A867 /* image_03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4FAB6DC22069E41E0039A867 /* image_03.jpg */; };
@@ -38,6 +39,8 @@
 		4F4F1E712069E387001BCB50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F4F1E732069E387001BCB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F4F1E742069E387001BCB50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4F65FD18206CDA8300175411 /* DSUScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSUScanViewController.h; sourceTree = "<group>"; };
+		4F65FD19206CDA8300175411 /* DSUScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSUScanViewController.m; sourceTree = "<group>"; };
 		4FAB6DC02069E41E0039A867 /* image_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_01.jpg; sourceTree = "<group>"; };
 		4FAB6DC12069E41E0039A867 /* image_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_02.jpg; sourceTree = "<group>"; };
 		4FAB6DC22069E41E0039A867 /* image_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_03.jpg; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				4FAB6DCB2069E41E0039A867 /* DSUAudioRecorder.m */,
 				4FAB6DCE2069E41E0039A867 /* DSUWebViewDefaultDelegate.h */,
 				4FAB6DC82069E41E0039A867 /* DSUWebViewDefaultDelegate.m */,
+				4F65FD18206CDA8300175411 /* DSUScanViewController.h */,
+				4F65FD19206CDA8300175411 /* DSUScanViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -279,7 +284,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DuanshuSDK Demo/Pods-DuanshuSDK Demo-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/MWPhotoBrowser/MWPhotoBrowser.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/MWPhotoBrowser/MWPhotoBrowser.bundle,
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 				"${PODS_ROOT}/WebViewJavascriptBridge/WebViewJavascriptBridge/WebViewJavascriptBridge.js.txt",
 			);
@@ -322,6 +327,7 @@
 				4F4F1E752069E387001BCB50 /* main.m in Sources */,
 				4FAB6DD32069E41E0039A867 /* DSUAudioPlayer.m in Sources */,
 				4FAB6DD52069E41E0039A867 /* DSUAudioRecorder.m in Sources */,
+				4F65FD1A206CDA8300175411 /* DSUScanViewController.m in Sources */,
 				4FAB6DD42069E41E0039A867 /* DSUWebViewDefaultDelegate.m in Sources */,
 				4FAB6DD62069E41E0039A867 /* ExampleViewController.m in Sources */,
 				4F4F1E672069E387001BCB50 /* AppDelegate.m in Sources */,
