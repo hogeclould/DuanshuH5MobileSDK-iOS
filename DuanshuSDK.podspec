@@ -3,8 +3,8 @@ Pod::Spec.new do |s|
   s.name         = "DuanshuSDK"
   s.version      = "1.0.1"
   s.platform     = :ios, "9.0"
-  s.authors      = 'dingdone'
-  s.license      = 'dingdone'
+  s.authors      = {'ddcore' => 'dd_core@hogeclould.com'}
+  s.license      = 'MIT'
   s.homepage     = 'http://www.duanshu.com'
   s.summary      = 'dingdone'
 
@@ -13,5 +13,7 @@ Pod::Spec.new do |s|
   s.vendored_frameworks = 'Framework/DuanshuSDK.framework'
 
   s.requires_arc = true
+
+  s.dependency 'WebViewJavascriptBridge'
 
 end
