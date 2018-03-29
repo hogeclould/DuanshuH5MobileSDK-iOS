@@ -9,9 +9,11 @@ target 'DuanshuSDK Demo' do
   pod 'TZImagePickerController'
   pod 'MWPhotoBrowser'
    
-  # source
+  # source 
 #  pod 'DuanshuSDK', path: '../../../../.'
 
   # framewok
-   pod 'DuanshuSDK', path: '../../.'
+   #pod 'DuanshuSDK', path: '../../.'
+
+  pod 'DuanshuSDK'
 end
