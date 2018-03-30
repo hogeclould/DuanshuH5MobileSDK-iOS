@@ -44,12 +44,17 @@
     [self.view addSubview:self.webView];
     
     if(self.contentURL == nil){
-        NSURL *mainUrl = [NSBundle mainBundle].bundleURL;
-        NSURL *url = [NSURL fileURLWithPath:@"JS_Sdk_files/JS_Sdk.htm" relativeToURL:mainUrl];
+//
+//        NSURL *mainUrl = [NSBundle mainBundle].bundleURL;
+//        NSURL *url = [NSURL fileURLWithPath:@"JS_Sdk_files/JS_Sdk.htm" relativeToURL:mainUrl];
+//
+//        NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+//        [self.webView loadHTMLString:htmlString baseURL:mainUrl];
         
-        NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+        NSURL *demoURL = [NSURL URLWithString:@"http://file.dingdone.com/dddoc/jssdk/Duanshu-h5sdk-API-Demo.html"];
         
-        [self.webView loadHTMLString:htmlString baseURL:mainUrl];
+         [self.webView loadRequest:[NSURLRequest requestWithURL:demoURL]];
+        
     }else{
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.contentURL]];
     }
