@@ -74,13 +74,13 @@
 
 - (void)pauseWithURL:(NSURL *)url completeBlock:(DSUCallbackBlock)complete{
     [self pause];
-    complete(1, @"暂停播放", @{@"status":@1});
+    complete(0, @"暂停播放", @{@"status":@1});
 }
 
 - (void)stopWithURL:(NSURL *)url completeBlock:(DSUCallbackBlock)complete{
     [self pause];
     [self clear];
-    self.completeBlock(0, @"停止播放", @{@"status":@1, @"url":self.currentUrl.absoluteString ?:@""});
+    complete(0, @"停止播放", @{@"status":@1, @"url":self.currentUrl.absoluteString ?:@""});
     
 }
 
