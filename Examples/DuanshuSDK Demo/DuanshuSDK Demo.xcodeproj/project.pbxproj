@@ -465,6 +465,7 @@
 			baseConfigurationReference = AFCBE30B51BAEDEB60FCCC38 /* Pods-DuanshuSDK Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6EBNN776LM;
 				ENABLE_BITCODE = NO;
@@ -479,7 +480,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "duanshu.DuanshuSDK-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -489,6 +491,7 @@
 			baseConfigurationReference = 88A9428B08F93FA30D2C0A95 /* Pods-DuanshuSDK Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6EBNN776LM;
 				ENABLE_BITCODE = NO;
@@ -503,7 +506,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "duanshu.DuanshuSDK-Demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
