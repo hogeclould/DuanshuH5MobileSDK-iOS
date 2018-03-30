@@ -86,6 +86,8 @@
     
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         NSString *temp = NSTemporaryDirectory();
+        
+        // 此处用户可以将图片上传到自己的服务器上，返回远程的图片url地址，返回给h5
         NSMutableArray *urls = [NSMutableArray array];
         for (UIImage *image in photos) {
             NSString *file = [temp stringByAppendingPathComponent:[NSUUID UUID].UUIDString];
