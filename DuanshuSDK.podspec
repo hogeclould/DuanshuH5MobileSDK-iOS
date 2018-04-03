@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "DuanshuSDK"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.platform     = :ios, "9.0"
   s.authors      = {'ddcore' => 'dd_core@hogeclould.com'}
   s.license      = 'MIT'
