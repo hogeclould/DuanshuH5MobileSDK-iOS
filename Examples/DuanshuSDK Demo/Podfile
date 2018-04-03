@@ -10,10 +10,10 @@ target 'DuanshuSDK Demo' do
   pod 'MWPhotoBrowser'
    
   # source 
-  pod 'DuanshuSDK', path: '../../../../.'
+#  pod 'DuanshuSDK', path: '../../../../.'
 
   # framewok
-#   pod 'DuanshuSDK', path: '../../.'
+   pod 'DuanshuSDK', path: '../../.'
 
 #  pod 'DuanshuSDK'
 end

@@ -18,6 +18,7 @@
 
 static const NSInteger kMaxTimeInterval = 120;
 
+static BOOL kBase64Enabled = NO;
 
 @interface DSUAudioRecorder()<AVAudioPlayerDelegate>
 @property (nonatomic, strong) AVAudioRecorder *recorder;
@@ -50,6 +51,10 @@ static const NSInteger kMaxTimeInterval = 120;
         
     }
     return self;
+}
+
++ (void)dsu_enableBase64:(BOOL)enable{
+    kBase64Enabled = enable;
 }
 
 + (void)dsu_startRecordCompleteBlock:(DSUCallbackBlock) complete timeoutBlock:(DSUCallbackBlock)timeoutBlock{
@@ -164,10 +169,14 @@ static const NSInteger kMaxTimeInterval = 120;
         
         if (convertSuccess) {
             NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-//            NSData *data = [NSData dataWithContentsOfFile:mp3File];
-//            userInfo[@"audioDuration"] = @(currentTime);
+            
+            if(kBase64Enabled){
+                NSData *data = [NSData dataWithContentsOfFile:mp3File];
+                userInfo[@"base64"] = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                userInfo[@"type"] = @"mp3";
+            }
+            
             userInfo[@"localPath"] = [NSURL fileURLWithPath:mp3File].absoluteString;
-//            userInfo[@"audioData"] = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             callback(0, @"结束录音", userInfo);
         }else{
             callback(0, @"录音转码错误", @{@"status":@(0)});

@@ -11,7 +11,7 @@
 
 
 @interface DSUAudioRecorder : NSObject
-
++ (void)dsu_enableBase64:(BOOL)enable;
 + (void)dsu_startRecordCompleteBlock:(DSUCallbackBlock) complete timeoutBlock:(DSUCallbackBlock)timeoutBlock;
 
 + (void)dsu_stopRecordCompleteBlock:(DSUCallbackBlock) complete;

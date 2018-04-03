@@ -69,13 +69,15 @@ typedef void(^DSUProgressBlock)(float currentTime, float duration, NSString * ur
 
 /**
  开始录音
- @param param h5传参
+ @param param h5传参 格式说明：{"base64_enabled":1}
  @param complete 成功开始录音执行回调
  @param timeoutBlock 录音超过最大时长后（建议最大时长120秒），自动结束录音，自动回调
  
  timeoutBlock 回调参数userInfo格式说明
  {
-   "localPath": "录音文件的本地暂存文件路径"
+   "localPath": "录音文件的本地暂存文件路径"，
+   "base64":"录音二进制文件的base64字符串",  // 当dsu_startRecordWithParam参数base64_enabled开启时，需要返回此参数
+   "type":"mp3" // 当dsu_startRecordWithParam参数base64_enabled开启时，需要返回此参数
  }
  */
 - (void)dsu_startRecordWithParam:(id)param
@@ -89,7 +91,9 @@ typedef void(^DSUProgressBlock)(float currentTime, float duration, NSString * ur
  @param complete 成功开始录音执行回调
  complete 回调参数userInfo格式说明
  {
-   "localPath": "录音文件的本地暂存文件路径"
+   "localPath": "录音文件的本地暂存文件路径"，
+    "base64":"录音二进制文件的base64字符串",  // 当dsu_startRecordWithParam参数base64_enabled开启时，需要返回此参数
+    "type":"mp3" // 当dsu_startRecordWithParam参数base64_enabled开启时，需要返回此参数
  }
  */
 - (void)dsu_stopRecordWithParam:(id)param
@@ -129,12 +133,19 @@ typedef void(^DSUProgressBlock)(float currentTime, float duration, NSString * ur
 
 /**
  选择图片
- @param param h5传参 格式说明：{"count":1}
+ @param param h5传参 格式说明：{"count":1, "base64_enabled":1}
  @param complete 选取图片完成后执行回调
  complete 回调参数userInfo格式说明
+ 1. 当base64_enabled=0或不传
  [
   "图片本地路径1",
   "图片本地路径2"
+ ]
+ 
+ 2. 当base64_enabled=1
+ [
+ {"localPath":"图片本地路径1", "type":"png", "base64":"xxxx"},
+ {"localPath":"图片本地路径2", "type":"jpg", "base64":"xxxx"}
  ]
  */
 - (void)dsu_chooseImageWithParam:(id)param
@@ -174,5 +185,16 @@ typedef void(^DSUProgressBlock)(float currentTime, float duration, NSString * ur
 */
 - (void)dsu_shareWithParam:(id)param
                completeBlock:(DSUCallbackBlock)complete;
+
+
+/**
+ 加载链接
+ @param param h5传参 格式说明：{
+ "url": “链接地址”
+ }
+ @param complete 执行回调
+ */
+- (void)dsu_loadUrlWithParam:(id)param
+             completeBlock:(DSUCallbackBlock)complete;
 
 @end

@@ -12,3 +12,7 @@
 @interface DSUWebViewDefaultDelegate : NSObject<DSUWebViewDelegate>
 
 @end
+
+@interface NSString(URLParameters)
+- (NSDictionary *)getURLParameters;
+@end

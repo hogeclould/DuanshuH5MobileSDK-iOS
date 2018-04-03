@@ -12,6 +12,8 @@
 #import "TZImagePickerController.h"
 #import "MWPhotoBrowser.h"
 #import <Social/Social.h>
+#import "ExampleViewController.h"
+
 
 @interface DSUWebViewDefaultDelegate()<TZImagePickerControllerDelegate, MWPhotoBrowserDelegate>
 @property (nonatomic, strong) NSMutableArray *photos;
@@ -22,19 +24,21 @@
 #pragma mark DSUWebViewDelegate
 - (void)dsu_getUserInfoWithParam:(id)param completeBlock:(DSUCallbackBlock)complete{
    NSDictionary *userInfo = @{
-                                @"userId":@"userid_xxxx",
+                                @"userId":@"userid_zhangsan_uuid",
                                 @"userName":@"张三",
-                                @"avatarUrl":@"http://xxxx.png",
-                                @"telephone": @"186xxxx"
+                                @"avatarUrl":@"http://s4.sinaimg.cn/mw690/001E55c8zy70SSUW4gj73&690",
+                                @"telephone":@"18651618858"
                               };
     
     complete(0, @"success", userInfo);
 }
 
-- (void)dsu_startRecordWithParam:(id)param
+- (void)dsu_startRecordWithParam:(NSDictionary *)param
                    completeBlock:(DSUCallbackBlock) complete
                     timeoutBlock:(DSUCallbackBlock)timeoutBlock{
     
+    BOOL base64_enabled = [param[@"base64_enabled"] boolValue];
+    [DSUAudioRecorder dsu_enableBase64:base64_enabled];
     [DSUAudioRecorder dsu_startRecordCompleteBlock:complete timeoutBlock:timeoutBlock];
 }
 
@@ -77,6 +81,8 @@
 - (void)dsu_chooseImageWithParam:(NSDictionary *)param completeBlock:(DSUCallbackBlock)complete{
     
     int count = [param[@"count"] intValue];
+    BOOL base64_enabled = [param[@"base64_enabled"] boolValue];
+    
     
     if (count == 0) {
         count =  1;
@@ -85,15 +91,38 @@
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count delegate:self];
     
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        
         NSString *temp = NSTemporaryDirectory();
         
         // 此处用户可以将图片上传到自己的服务器上，返回远程的图片url地址，返回给h5
         NSMutableArray *urls = [NSMutableArray array];
         for (UIImage *image in photos) {
             NSString *file = [temp stringByAppendingPathComponent:[NSUUID UUID].UUIDString];
-            [UIImagePNGRepresentation(image) writeToFile:file atomically:YES];
-            [urls addObject:[NSURL fileURLWithPath:file].absoluteString];
+            
+            NSData *data = UIImagePNGRepresentation(image);
+            
+            NSString *type = @"png";
+            if (data == nil) {
+                data = UIImageJPEGRepresentation(image, 0.5);
+                type = @"jpg";
+            }
+            
+            [data writeToFile:file atomically:YES];
+            if(base64_enabled){
+                
+                NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+                
+                info[@"localPath"] = [NSURL fileURLWithPath:file].absoluteString;
+                info[@"type"] = type;
+                info[@"base64"] = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                
+                [urls addObject:info];
+                
+            }else{
+                [urls addObject:[NSURL fileURLWithPath:file].absoluteString];
+            }
         }
+        
         complete(1, @"选取图片", urls);
     }];
     
@@ -196,6 +225,31 @@
 }
 
 
+- (void)dsu_loadUrlWithParam:(id)param completeBlock:(DSUCallbackBlock)complete{
+    NSString *url = param[@"url"];
+    
+    if([url hasPrefix:@"dingdone://tel"]){
+        NSDictionary *params = [url getURLParameters];
+        NSString *phoneNumber = params[@"phone_number"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", phoneNumber]]];
+        
+        complete(0, nil, nil);
+        
+    }else if([url hasPrefix:@"http"]){
+        ExampleViewController *vc = [[ExampleViewController alloc] init];
+        
+        vc.contentURL = [NSURL URLWithString:url];
+        
+        UINavigationController * navigationController = (UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        
+        [navigationController pushViewController:vc animated:YES];
+        
+        complete(0, nil, nil);
+    }
+    
+}
+
+
 #pragma mark -
 #pragma MWPhotoBrowserDelegate
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
@@ -213,3 +267,89 @@
 
 
 @end
+
+
+@implementation NSString(URLParameters)
+
+- (NSDictionary *)getURLParameters {
+    
+    // 查找参数
+    NSRange range = [self rangeOfString:@"?"];
+    if (range.location == NSNotFound) {
+        return nil;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    // 截取参数
+    NSString *parametersString = [self substringFromIndex:range.location + 1];
+    
+    // 判断参数是单个参数还是多个参数
+    if ([parametersString containsString:@"&"]) {
+        
+        // 多个参数，分割参数
+        NSArray *urlComponents = [parametersString componentsSeparatedByString:@"&"];
+        
+        for (NSString *keyValuePair in urlComponents) {
+            // 生成Key/Value
+            NSArray *pairComponents = [keyValuePair componentsSeparatedByString:@"="];
+            NSString *key = [pairComponents.firstObject stringByRemovingPercentEncoding];
+            NSString *value = [pairComponents.lastObject stringByRemovingPercentEncoding];
+            
+            // Key不能为nil
+            if (key == nil || value == nil) {
+                continue;
+            }
+            
+            id existValue = [params valueForKey:key];
+            
+            if (existValue != nil) {
+                
+                // 已存在的值，生成数组
+                if ([existValue isKindOfClass:[NSArray class]]) {
+                    // 已存在的值生成数组
+                    NSMutableArray *items = [NSMutableArray arrayWithArray:existValue];
+                    [items addObject:value];
+                    
+                    [params setValue:items forKey:key];
+                } else {
+                    
+                    // 非数组
+                    [params setValue:@[existValue, value] forKey:key];
+                }
+                
+            } else {
+                
+                // 设置值
+                [params setValue:value forKey:key];
+            }
+        }
+    } else {
+        // 单个参数
+        
+        // 生成Key/Value
+        NSArray *pairComponents = [parametersString componentsSeparatedByString:@"="];
+        
+        // 只有一个参数，没有值
+        if (pairComponents.count == 1) {
+            return nil;
+        }
+        
+        // 分隔值
+        NSString *key = [pairComponents.firstObject stringByRemovingPercentEncoding];
+        NSString *value = [pairComponents.lastObject stringByRemovingPercentEncoding];
+        
+        // Key不能为nil
+        if (key == nil || value == nil) {
+            return nil;
+        }
+        
+        // 设置值
+        [params setValue:value forKey:key];
+    }
+    
+    return params.copy;
+}
+
+@end
+
