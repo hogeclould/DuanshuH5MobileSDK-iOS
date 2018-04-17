@@ -230,88 +230,87 @@ alert(JSON.stringify(data));
 - 是否必传: 可选
 
 ​
-​
-​
-​## 停止语音
-​**方法名**
-​```
-​duanshu.stopVoice(params, callback)
-​```
+## 停止语音
+**方法名**
+
+```
+duanshu.stopVoice(params, callback)
+```
 ​
 ​**请求示例**
-​```
-​duanshu.stopVoice(params,function(data){
-​alert(JSON.stringify(data));
-​});
-​```
+```
+duanshu.stopVoice(params,function(data){
+alert(JSON.stringify(data));
+});
+```
 ​
-​**参数说明**
-​- 参数名称: callback
-​- 参数类型: 回调函数 `callback(data)`
-​- 回调结果: 如下
-​- 是否必传: 可选
+**参数说明**
+- 参数名称: callback
+- 参数类型: 回调函数 `callback(data)`  
+- 回调结果: 如下
+- 是否必传: 可选
 ​
 ​
-​## 播放状态监听
-​> 特别说明：registerEvents方法需一次将全部需要的监听注册，暂时不支持单个注册
-​> **方法名**
-​```
+## 播放状态监听
+> 特别说明：registerEvents方法需一次将全部需要的监听注册，暂时不支持单个注册
+> **方法名**
+```
 ​duanshu.registerEvents({
 ​onVoicePlayEnd: function(response){
 ​alert(JSON.stringify(response)); // 用户自身逻辑
 ​}
 ​});
 ​
-​```
+```
 ​**回调结果**
-​```json
+```json
 ​{
 ​"code": 0,
 ​"msg": "success"
 ​}
-​```
+```
 ​
 ​**返回结果字段说明**
 ​
-​| key  | 名称   | 类型     | 默认值       | 说明                                       |
-​| ---- | ---- | ------ | --------- | ---------------------------------------- |
-​| code | 状态码  | int    | 0         | 0: 播放成功                            1: 播放失败 |
-​| msg  | 状态说明 | string | "success" | success 、error                           |
+| key  | 名称   | 类型     | 默认值       | 说明                                       |
+| ---- | ---- | ------ | --------- | ---------------------------------------- |
+| code | 状态码  | int    | 0         | 0: 播放成功                            1:播放失败 |
+| msg  | 状态说明 | string | "success" | success 、error                           |
 ​
 ​---
-​## 图片相关
-​
-​## 选择本地图片
-​**方法名**
-​```
-​duanshu.chooseImage(params, callback)
-​```
-​
-​**请求示例**
-​```
+## 图片相关
+
+## 选择本地图片
+**方法名**
+```
+duanshu.chooseImage(params, callback)
+```
+
+**请求示例**
+```
 ​var params = {"count":1, "base64_enabled":1};
 ​duanshu.chooseImage(params, function(data){
 ​alert(JSON.stringify(data));
 ​});
-​```
-​
-​**参数说明**
-​- 参数名称: params
-​- 参数说明:
-​```
-​{
-​"count":"最多选取图片张数",
-​"base64_enabled":"是否开启二进制数据base64转换"
-​}
-​```
-​- 是否必传: 必传参数
-​- 参数名称: callback
-​- 参数类型: 回调函数 `callback(data)`
-​- 回调结果: 如下
-​- 是否必传: 必传
-​
-​**回调结果（base64_enabled = 0）**
-​```json
+```
+
+**参数说明**
+- 参数名称: params
+- 参数说明:
+```
+{​ 
+"count":"最多选取图片张数", 
+"base64_enabled":"是否开启二进制数据base64转换" 
+}
+```
+- 是否必传: 必传参数
+- 参数名称: callback
+- 参数类型: 回调函数 `callback(data)`
+- 回调结果: 如下
+- 是否必传: 必传
+
+**回调结果（base64_enabled = 0）**
+```json
 ​{
 ​"code": 0,
 ​"msg": "success",
@@ -320,10 +319,10 @@ alert(JSON.stringify(data));
 ​"图片本地路径2"
 ​]
 ​}
-​```
+```
 ​
-​**回调结果（base64_enabled = 1）**
-​```json
+**回调结果（base64_enabled = 1）**
+```json
 ​{
 ​"code": 0,
 ​"msg": "success",
@@ -332,53 +331,53 @@ alert(JSON.stringify(data));
 ​{"localPath":"图片本地路径2", "type":"jpg", "base64":"xxxx"}
 ​]
 ​}
-​```
+```
 ​
 ​**返回结果字段说明**
 ​
-​| key  | 名称       | 类型     | 默认值       | 说明             |
-​| ---- | -------- | ------ | --------- | -------------- |
-​| code | 状态码      | int    | 0         | 0: 成功 、 1：失败   |
-​| msg  | 状态说明     | string | "success" | success 、error |
-​| data | 文件本地路径数组 | []     |           |                |
+| key  | 名称       | 类型     | 默认值       | 说明             | 
+| ---- | -------- | ------ | --------- | -------------- |
+| code | 状态码      | int    | 0         | 0: 成功 、 1：失败   |
+| msg  | 状态说明     | string | "success" | success 、error |
+| data | 文件本地路径数组 | []     |           |                |
 ​
-​## 单图预览
-​**方法名**
-​```
+## 单图预览
+**方法名**
+```
 ​duanshu.previewImage(params, callback)
-​```
+```
 ​
 ​**请求示例**
-​```
+```
 ​var params = {
 ​"imgUrl":"http://xxx_1.jpg"
 ​};
 ​duanshu.previewImage(params, function(data){
 ​alert(JSON.stringify(data));
 ​});
-​```
+```
+
+**参数说明**
+- 参数名称: params
+- 参数说明:
+```
+imgUrl:单张图片的地址
+```
+- 是否必传: 必传参数
+- 参数名称: callback
+- 参数类型: 回调函数 `callback(data)`
+- 回调结果: 如下
+- 是否必传: 可选
 ​
-​**参数说明**
-​- 参数名称: params
-​- 参数说明:
-​```
-​imgUrl:单张图片的地址
-​```
-​- 是否必传: 必传参数
-​- 参数名称: callback
-​- 参数类型: 回调函数 `callback(data)`
-​- 回调结果: 如下
-​- 是否必传: 可选
+
+## 多图预览
+**方法名** 
+```
+duanshu.previewPic(params, callback) 
+```
 ​
-​
-​## 多图预览
-​**方法名**
-​```
-​duanshu.previewPic(params, callback)
-​```
-​
-​**请求示例**
-​```
+**请求示例**
+```
 ​var params = {
 ​"position":0,
 ​"pics":[
@@ -389,12 +388,12 @@ alert(JSON.stringify(data));
 ​duanshu.previewImage(params, function(data){
 ​alert(JSON.stringify(data));
 ​});
-​```
+```
 ​
-​**参数说明**
-​- 参数名称: params
-​- 参数说明:
-​```
+**参数说明**
+- 参数名称: params
+- 参数说明:
+```
 ​{
 ​"position":0, // 默认从哪张图片开始预览 注意：position不得大于图片张数
 ​"pics":[
@@ -402,24 +401,24 @@ alert(JSON.stringify(data));
 ​"图片链接2"
 ​]
 ​}
-​```
-​- 是否必传: 必传参数
-​- 参数名称: callback
-​- 参数类型: 回调函数 `callback(data)`
-​- 回调结果: 如下
-​- 是否必传: 可选
+```
+- 是否必传: 必传参数
+- 参数名称: callback
+- 参数类型: 回调函数 `callback(data)`
+- 回调结果: 如下
+- 是否必传: 可选
 ​
 ​
 ​---
-​## 分享相关
-​## 分享方法
+## 分享相关
+## 分享方法
 ​**方法名**
-​```
+```
 ​duanshu.share(params, callback)
-​```
+```
 ​
 ​**请求示例**
-​```
+```
 ​var params = {
 ​"title": “分享标题”,
 ​"content": “分享描述”,
@@ -431,88 +430,88 @@ alert(JSON.stringify(data));
 ​duanshu.share(params, function(data){
 ​alert(JSON.stringify(data));
 ​});
-​```
+```
 ​
-​**参数说明**
-​- 参数名称: params
-​- 参数说明:
-​```
-​{
+**参数说明**
+- 参数名称: params
+- 参数说明:
+```
+{ 
 ​"title": “分享标题”,
 ​"content": “分享描述”,
 ​"picurl": “分享图片链接”,
 ​"url": “分享内容链接”,
-"updateShareData": “1:只更新数据，不弹分享框；0:弹出分享框”,
+"updateShareData": “1:只更新数据，不弹分享框；0:弹出分享框”, 
 "showShareButton": “1:显示分享按钮；0:不显示分享按钮”
-​}
-​```
-​- 是否必传: 必传参数
-​- 参数名称: callback
-​- 参数类型: 回调函数 `callback(data)`
-​- 回调结果: 如下
-​- 是否必传: 可选
-​
-​**回调结果**
-​```json
+}
+```
+- 是否必传: 必传参数
+- 参数名称: callback
+- 参数类型: 回调函数 `callback(data)`
+- 回调结果: 如下
+- 是否必传: 可选
+
+**回调结果**
+```json
 ​{
 ​"code": 0,
 ​"msg": "success"
 ​}
-​```
+```
 ​
 ​---
-​## 其他
-​## 加载URL
+## 其他
+## 加载URL
 ​**方法名**
-​```
+```
 ​duanshu.loadUrl(params, callback)
-​```
+```
 ​
 ​**请求示例**
-​```
+```
 ​var params = {"url": “内容链接”};
 ​duanshu.loadUrl(params, function(data){
 ​alert(JSON.stringify(data));
 ​});
-​```
+```
 ​
 ​**参数说明**
-​- 参数名称: params
-​- 参数说明:
-​```
+- 参数名称: params
+- 参数说明:
+```
 ​{
 ​"url": “内容链接” // 支持http/https  dingdone://tel?phone_number=10086
 ​}
-​```
-​- 是否必传: 必传参数
-​- 参数名称: callback
-​- 参数类型: 回调函数 `callback(data)`
-​- 回调结果: 如下
-​- 是否必传: 可选
-​
-​**回调结果**
-​```json
+```
+- 是否必传: 必传参数
+- 参数名称: callback
+- 参数类型: 回调函数 `callback(data)`
+- 回调结果: 如下
+- 是否必传: 可选
+
+**回调结果**
+```json
 ​{
 ​"code": 0,
 ​"msg": "success"
 ​}
-​```
+```
 ​
-​**返回结果字段说明**
+**返回结果字段说明**
 ​
-​| key  | 名称   | 类型     | 默认值       | 说明               |
-​| ---- | ---- | ------ | --------- | ---------------- |
-​| code | 状态码  | int    | 0         | 0: 分享成功 、 1：分享失败 |
-​| msg  | 状态说明 | string | "success" | success 、error   |
-​
-​## 全局状态码说明 `code`
-​| key  | 值    | 说明     |
-​| ---- | ---- | ------ |
-​| code | 0    | 正常返回   |
-​| code | 1    | 失败     |
-​| code | 3    | 用户未登录  |
-​| code | 10   | 网络异常   |
-​| code | 11   | 没有权限   |
-​| code | 13   | 方法未被支持 |
-​| code | 14   | 方法执行异常 |
+| key  | 名称   | 类型     | 默认值       | 说明               | 
+| ---- | ---- | ------ | --------- | ---------------- |
+| code | 状态码  | int    | 0         | 0: 分享成功 、 1：分享失败 |
+| msg  | 状态说明 | string | "success" | success 、error   |
+
+## 全局状态码说明 `code`
+| key  | 值    | 说明     |
+| ---- | ---- | ------ |
+| code | 0    | 正常返回   |
+| code | 1    | 失败     |
+| code | 3    | 用户未登录  |
+| code | 10   | 网络异常   |
+| code | 11   | 没有权限   |
+| code | 13   | 方法未被支持 |
+| code | 14   | 方法执行异常 |
 
