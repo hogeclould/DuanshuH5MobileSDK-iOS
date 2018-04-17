@@ -9,17 +9,16 @@
 ## 用户相关
 ## 获取用户信息
 **方法名**
-```
+```js
 duanshu.getUserInfo(params, function callback)
 ```
 
 **请求示例**
-```
+```js
 duanshu.getUserInfo(
-function(res)
-{
-//res.data {} 为用户的基本信息
-}
+    function(res){
+        //res.data {} 为用户的基本信息
+    }
 );
 ```
 
@@ -33,14 +32,14 @@ function(res)
 **回调结果**
 ```json
 {
-"code": 0,
-"msg": "success",
-"data": {
-"userName": "用户名",
-"userId": "用户id",
-"avatarUrl": "用户头像链接",
-"telephone": "绑定手机号"
-}
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "userName": "用户名",
+        "userId": "用户id",
+        "avatarUrl": "用户头像链接",
+        "telephone": "绑定手机号"
+        }
 }
 ```
 
@@ -62,16 +61,19 @@ function(res)
 
 ## 开始录音
 **方法名**
-```
+```js
 duanshu.startRecord(params, callback)
 ```
 
 **请求示例**
-```
-var params = {"base64_enabled":1}
+```js
+var params = {
+    "base64_enabled":1
+    }
+
 duanshu.startRecord(params, function(data){
-alert(JSON.stringify(data));
-});
+    alert(JSON.stringify(data));
+    });
 ```
 
 **参数说明**
@@ -88,15 +90,15 @@ alert(JSON.stringify(data));
 
 ## 停止录音
 **方法名**
-```
+```js
 duanshu.stopRecord(callback)
 ```
 
 **请求示例**
-```
+```js
 duanshu.stopRecord(function(data){
-alert(JSON.stringify(data));
-});
+    alert(JSON.stringify(data));
+    });
 ```
 
 **参数说明**
@@ -111,13 +113,13 @@ alert(JSON.stringify(data));
 **回调结果**
 ```json
 {
-"code": 0,
-"msg": "success",
-"data": {
-"localPath": "录音文件的本地暂存文件路径",
-"base64":"录音二进制文件的base64字符串",
-"type":"mp3"
-}
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "localPath": "录音文件的本地暂存文件路径",
+        "base64":"录音二进制文件的base64字符串",
+        "type":"mp3"
+        }
 }
 ```
 
@@ -135,10 +137,10 @@ alert(JSON.stringify(data));
 ## 录音自动结束监听
 > 特别说明：registerEvents方法需一次将全部需要的监听注册，暂时不支持单个注册
 > **方法名**
-```
+```js
 duanshu.registerEvents({
-OnVoiceRecordEnd: function(response){
-alert(JSON.stringify(response)); // 用户自身逻辑
+    OnVoiceRecordEnd: function(response){
+        alert(JSON.stringify(response)); // 用户自身逻辑
 }
 });
 
@@ -146,13 +148,13 @@ alert(JSON.stringify(response)); // 用户自身逻辑
 **回调结果**
 ```json
 {
-"code": 0,
-"msg": "success",
-"data": {
-"localPath": "录音文件的本地暂存文件路径",
-"base64":"录音二进制文件的base64字符串",
-"type":"mp3"
-}
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "localPath": "录音文件的本地暂存文件路径",
+        "base64":"录音二进制文件的base64字符串",
+        "type":"mp3"
+        }
 }
 ```
 
@@ -171,17 +173,18 @@ alert(JSON.stringify(response)); // 用户自身逻辑
 ## 播放相关
 ## 播放语音
 **方法名**
-```
+```js
 duanshu.playVoice(params, callback)
 ```
 
 **请求示例**
-```
-var params = {"record_url":"http://xxx.mp3",
-}
+```js
+var params = {
+    "record_url":"http://xxx.mp3",
+    }
 duanshu.playVoice(params,function(data){
-alert(JSON.stringify(data));
-});
+    alert(JSON.stringify(data));
+    });
 ```
 
 **参数说明**
@@ -189,7 +192,7 @@ alert(JSON.stringify(data));
 - 参数说明:
 ```
 {
-"record_url":"http://xxx.mp3"
+    "record_url":"http://xxx.mp3"
 }
 ```
 - 字段说明:
@@ -208,15 +211,15 @@ alert(JSON.stringify(data));
 
 ## 暂停语音
 **方法名**
-```
+```js
 duanshu.pauseVoice(params, callback)
 ```
 
 **请求示例**
-```
+```js
 duanshu.pauseVoice(params,function(data){
-alert(JSON.stringify(data));
-});
+    alert(JSON.stringify(data));
+    });
 ```
 
 **参数说明**
@@ -233,74 +236,75 @@ alert(JSON.stringify(data));
 ## 停止语音
 **方法名**
 
-```
+```js
 duanshu.stopVoice(params, callback)
 ```
-​
-​**请求示例**
-```
+
+**请求示例**
+```js
 duanshu.stopVoice(params,function(data){
-alert(JSON.stringify(data));
+    alert(JSON.stringify(data));
 });
 ```
-​
+
 **参数说明**
 - 参数名称: callback
 - 参数类型: 回调函数 `callback(data)`  
 - 回调结果: 如下
 - 是否必传: 可选
-​
-​
+
 ## 播放状态监听
 > 特别说明：registerEvents方法需一次将全部需要的监听注册，暂时不支持单个注册
 > **方法名**
+```js
+duanshu.registerEvents({
+    onVoicePlayEnd: function(response){
+        alert(JSON.stringify(response)); // 用户自身逻辑
+        }
+        });
+
 ```
-​duanshu.registerEvents({
-​onVoicePlayEnd: function(response){
-​alert(JSON.stringify(response)); // 用户自身逻辑
-​}
-​});
-​
-```
-​**回调结果**
+**回调结果**
 ```json
-​{
-​"code": 0,
-​"msg": "success"
-​}
+{
+    "code": 0,
+    "msg": "success"
+}
 ```
-​
-​**返回结果字段说明**
-​
+
+**返回结果字段说明**
+
 | key  | 名称   | 类型     | 默认值       | 说明                                       |
 | ---- | ---- | ------ | --------- | ---------------------------------------- |
 | code | 状态码  | int    | 0         | 0: 播放成功                            1:播放失败 |
 | msg  | 状态说明 | string | "success" | success 、error                           |
-​
-​---
+---
 ## 图片相关
 
 ## 选择本地图片
 **方法名**
-```
+```js
 duanshu.chooseImage(params, callback)
 ```
 
 **请求示例**
-```
-​var params = {"count":1, "base64_enabled":1};
-​duanshu.chooseImage(params, function(data){
-​alert(JSON.stringify(data));
-​});
+```js
+var params = {
+    "count":1, 
+    "base64_enabled":1
+    };
+duanshu.chooseImage(params, function(data){
+    alert(JSON.stringify(data));
+    });
 ```
 
 **参数说明**
 - 参数名称: params
 - 参数说明:
 ```
-{​ 
-"count":"最多选取图片张数", 
-"base64_enabled":"是否开启二进制数据base64转换" 
+{​
+    "count":"最多选取图片张数", 
+    "base64_enabled":"是否开启二进制数据base64转换" 
 }
 ```
 - 是否必传: 必传参数
@@ -311,50 +315,58 @@ duanshu.chooseImage(params, callback)
 
 **回调结果（base64_enabled = 0）**
 ```json
-​{
-​"code": 0,
-​"msg": "success",
-​"data": [
-​"图片本地路径1",
-​"图片本地路径2"
-​]
-​}
+{
+    "code": 0,
+    "msg": "success",
+    "data": [
+        "图片本地路径1",
+        "图片本地路径2"
+        ]
+}
 ```
-​
+
 **回调结果（base64_enabled = 1）**
 ```json
-​{
-​"code": 0,
-​"msg": "success",
-​"data": [
-​{"localPath":"图片本地路径1", "type":"png", "base64":"xxxx"},
-​{"localPath":"图片本地路径2", "type":"jpg", "base64":"xxxx"}
-​]
-​}
+{
+    "code": 0,
+    "msg": "success",
+    "data": [
+        {
+            "localPath":"图片本地路径1", 
+            "type":"png", 
+            "base64":"xxxx"
+        },
+        {
+            "localPath":"图片本地路径2", 
+            "type":"jpg", 
+            "base64":"xxxx"
+            }
+    ]
+}
 ```
-​
-​**返回结果字段说明**
-​
+
+**返回结果字段说明**
+
 | key  | 名称       | 类型     | 默认值       | 说明             | 
 | ---- | -------- | ------ | --------- | -------------- |
 | code | 状态码      | int    | 0         | 0: 成功 、 1：失败   |
 | msg  | 状态说明     | string | "success" | success 、error |
 | data | 文件本地路径数组 | []     |           |                |
-​
+
 ## 单图预览
 **方法名**
+```js
+duanshu.previewImage(params, callback)
 ```
-​duanshu.previewImage(params, callback)
-```
-​
-​**请求示例**
-```
-​var params = {
-​"imgUrl":"http://xxx_1.jpg"
-​};
-​duanshu.previewImage(params, function(data){
-​alert(JSON.stringify(data));
-​});
+
+**请求示例**
+```js
+var params = {
+    "imgUrl":"http://xxx_1.jpg"
+    };
+duanshu.previewImage(params, function(data){
+    alert(JSON.stringify(data));
+    });
 ```
 
 **参数说明**
@@ -368,81 +380,80 @@ imgUrl:单张图片的地址
 - 参数类型: 回调函数 `callback(data)`
 - 回调结果: 如下
 - 是否必传: 可选
-​
+
 
 ## 多图预览
 **方法名** 
-```
+```js
 duanshu.previewPic(params, callback) 
 ```
-​
+
 **请求示例**
+```js
+var params = {
+    "position":0,
+    "pics":[
+        "http://xxx_1.jpg",
+        "http://xxx_2.jpg"
+        ]
+        };
+duanshu.previewImage(params, function(data){
+    alert(JSON.stringify(data));
+});
 ```
-​var params = {
-​"position":0,
-​"pics":[
-​"http://xxx_1.jpg",
-​"http://xxx_2.jpg"
-​]
-​};
-​duanshu.previewImage(params, function(data){
-​alert(JSON.stringify(data));
-​});
-```
-​
+
 **参数说明**
 - 参数名称: params
 - 参数说明:
 ```
-​{
-​"position":0, // 默认从哪张图片开始预览 注意：position不得大于图片张数
-​"pics":[
-​"图片链接1",
-​"图片链接2"
-​]
-​}
+{
+    "position":0, // 默认从哪张图片开始预览 注意：position不得大于图片张数​
+    "pics":[
+        "图片链接1",
+        "图片链接2"
+        ]
+}
 ```
 - 是否必传: 必传参数
 - 参数名称: callback
 - 参数类型: 回调函数 `callback(data)`
 - 回调结果: 如下
 - 是否必传: 可选
-​
-​
-​---
+
+--- 
 ## 分享相关
 ## 分享方法
-​**方法名**
+**方法名**
+```js
+duanshu.share(params, callback)
 ```
-​duanshu.share(params, callback)
+
+**请求示例**
+```js
+var params = {
+    "title": "分享标题",
+    "content": "分享描述",
+    "picurl": "分享图片链接",
+    "url": "分享内容链接",
+    "updateShareData": "1:只更新数据，不弹分享框；0:弹出分享框",
+    "showShareButton": "1:显示分享按钮；0:不显示分享按钮"
+    };
+duanshu.share(params, function(data){
+    alert(JSON.stringify(data));
+    });
 ```
-​
-​**请求示例**
-```
-​var params = {
-​"title": “分享标题”,
-​"content": “分享描述”,
-​"picurl": “分享图片链接”,
-​"url": “分享内容链接”,
-"updateShareData": “1:只更新数据，不弹分享框；0:弹出分享框”,
-"showShareButton": “1:显示分享按钮；0:不显示分享按钮”
-​};
-​duanshu.share(params, function(data){
-​alert(JSON.stringify(data));
-​});
-```
-​
+
 **参数说明**
 - 参数名称: params
 - 参数说明:
 ```
 { 
-​"title": “分享标题”,
-​"content": “分享描述”,
-​"picurl": “分享图片链接”,
-​"url": “分享内容链接”,
-"updateShareData": “1:只更新数据，不弹分享框；0:弹出分享框”, 
-"showShareButton": “1:显示分享按钮；0:不显示分享按钮”
+    "title": “分享标题”,
+    "content": “分享描述”,
+    "picurl": “分享图片链接”,
+    "url": “分享内容链接”,
+    "updateShareData": "1:只更新数据，不弹分享框；0:弹出分享框",
+    "showShareButton": "1:显示分享按钮；0:不显示分享按钮"
 }
 ```
 - 是否必传: 必传参数
@@ -453,35 +464,37 @@ duanshu.previewPic(params, callback)
 
 **回调结果**
 ```json
-​{
-​"code": 0,
-​"msg": "success"
-​}
+{
+    "code": 0,
+    "msg": "success"
+}
 ```
-​
-​---
+
+---
 ## 其他
 ## 加载URL
-​**方法名**
+**方法名**
+```js
+duanshu.loadUrl(params, callback)
 ```
-​duanshu.loadUrl(params, callback)
+
+**请求示例**
+```js
+var params = {
+    "url": “内容链接”
+    };
+duanshu.loadUrl(params, function(data){
+    alert(JSON.stringify(data));
+    });
 ```
-​
-​**请求示例**
-```
-​var params = {"url": “内容链接”};
-​duanshu.loadUrl(params, function(data){
-​alert(JSON.stringify(data));
-​});
-```
-​
-​**参数说明**
+
+**参数说明**
 - 参数名称: params
 - 参数说明:
 ```
-​{
-​"url": “内容链接” // 支持http/https  dingdone://tel?phone_number=10086
-​}
+{
+    "url": “内容链接” // 支持http/https  dingdone://tel?phone_number=10086
+}
 ```
 - 是否必传: 必传参数
 - 参数名称: callback
@@ -491,14 +504,14 @@ duanshu.previewPic(params, callback)
 
 **回调结果**
 ```json
-​{
-​"code": 0,
-​"msg": "success"
-​}
+{
+    "code": 0,
+    "msg": "success"
+}
 ```
-​
+
 **返回结果字段说明**
-​
+
 | key  | 名称   | 类型     | 默认值       | 说明               | 
 | ---- | ---- | ------ | --------- | ---------------- |
 | code | 状态码  | int    | 0         | 0: 分享成功 、 1：分享失败 |
