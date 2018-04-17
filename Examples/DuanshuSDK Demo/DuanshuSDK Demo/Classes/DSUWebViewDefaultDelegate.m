@@ -17,6 +17,8 @@
 
 @interface DSUWebViewDefaultDelegate()<TZImagePickerControllerDelegate, MWPhotoBrowserDelegate>
 @property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSArray *items;
+@property (nonatomic, copy) DSUCallbackBlock shareComplete;
 @end
 
 @implementation DSUWebViewDefaultDelegate
@@ -197,24 +199,46 @@
     NSString *title = param[@"title"];
     NSString *imageURLString = param[@"picurl"];
     NSString *content = param[@"content"];
+    NSString *updateShareData = param[@"updateShareData"];
+    NSString *showShareButton = param[@"showShareButton"];
+    
     NSURL *url = [NSURL URLWithString:@"http://www.duanshu.com/index.html"];
     
     NSURL *imageURL =  [NSURL URLWithString:imageURLString];
     
     NSArray *items = @[title, imageURL, content, url];
+    self.items = items;
+    self.shareComplete = complete;
     
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+    if (!updateShareData.boolValue) {
+
+        [self share];
+        
+    }
     
+    // 获取当前页面
+    UINavigationController *naviVC = (UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *currentVC = naviVC.viewControllers.lastObject;
     
+    // 展示 or 隐藏导航栏左侧按钮
+    currentVC.navigationItem.leftBarButtonItem = showShareButton.boolValue ? [[UIBarButtonItem alloc] initWithTitle:@"分享" style:UIBarButtonItemStylePlain target:self action: @selector(share)] : nil;
+    
+}
+
+- (void)share {
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:self.items applicationActivities:nil];
+    
+    __weak typeof(self) weakSelf = self;
     UIActivityViewControllerCompletionWithItemsHandler itemsBlock = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError){
         NSLog(@"activityType == %@",activityType);
         if (completed == YES) {
-            complete(0, @"completed", nil);
+            weakSelf.shareComplete(0, @"completed", nil);
         }else{
-            complete(0, @"cancle", nil);
+            weakSelf.shareComplete(0, @"cancle", nil);
         }
         
-        complete(0, @"completed", nil);
+        weakSelf.shareComplete(0, @"completed", nil);
         
         [activityVC dismissViewControllerAnimated:YES completion:nil];
     };
