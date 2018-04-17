@@ -1,9 +1,8 @@
 # 短书JSSDK API v2.1说明
 
 ## 变更内容
-- `startRecord`函数增加参数`{"base64_enabled":1}`, 监听或停止录制时，数据增加字段`base64`
-- `chooseImage`函数增加参数`{"base64_enabled":1}`, 返回值格式变更
-- 增加`loadUrl`函数
+- `share`函数增加参数`{"updateShareData":1}`, 1:只更新数据，不弹分享框；0:弹出分享框段`base64`
+- `share`函数增加参数`{"showShareButton":1}`, 1:显示分享按钮；0:不显示分享按钮
 
 
 ---

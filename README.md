@@ -174,7 +174,9 @@ pod 'WebViewJavascriptBridge', '6.0'
     "title": “分享标题”,
     "content": “分享描述”,
     "picurl": “分享图片链接”,
-    "url": “分享内容链接”
+    "url": “分享内容链接”,
+    "updateShareData": “1:只更新数据，不弹分享框；0:弹出分享框”,
+    "showShareButton": “1:显示分享按钮；0:不显示分享按钮”
  }
  @param complete 成功分享执行回调
 */
