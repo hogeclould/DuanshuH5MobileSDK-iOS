@@ -2,20 +2,22 @@
 //  DuanshuSDK.h
 //  DuanshuSDK
 //
-//  Created by 苏强 on 2018/3/26.
-//  Copyright © 2018年 厚建云计算. All rights reserved.
+//  Created by Firo on 2018/4/18.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "DSUConfig.h"
 
-//! Project version number for DuanshuSDK.
-FOUNDATION_EXPORT double DuanshuSDKVersionNumber;
+@interface DuanshuSDK : NSObject
 
-//! Project version string for DuanshuSDK.
-FOUNDATION_EXPORT const unsigned char DuanshuSDKVersionString[];
+@property (class, readonly, strong) DuanshuSDK *shared;/**< 使用单例访问接口*/
 
-// In this header, you should import all the public headers of your framework using statements like #import <DuanshuSDK/PublicHeader.h>
-#import <DuanshuSDK/DSUWebView.h>
-#import <DuanshuSDK/DSUWebViewDelegate.h>
+/**
+ 初始化 SDK.
+ 使用 SDK 前必须先初始化 SDK.
 
+ @param config SDK配置
+ */
+- (void)initializeSDKWithConfig:(DSUConfig *)config;
 
+@end

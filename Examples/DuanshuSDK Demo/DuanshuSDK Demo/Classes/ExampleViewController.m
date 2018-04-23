@@ -10,6 +10,7 @@
 #import "ExampleWebView.h"
 #import "DSUWebViewDefaultDelegate.h"
 #import "DSUScanViewController.h"
+#import <DuanshuSDK/DSUBaseSDK.h>
 
 @interface ExampleViewController ()<UIWebViewDelegate, DSUWebViewDelegate>
 @property (nonatomic, strong) ExampleWebView *webView;
@@ -26,6 +27,11 @@
     self.navigationItem.title = @"短书H5-SDK Demo";
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    // 初始化配置
+    DSUConfig *config = [[DSUConfig alloc] initWithAppId:@"ds31jed4898g36275b0g" appSercet:@"dc3f1cca46a411e89ce5acbc32cb692b"];
+    // 初始化SDK
+    [DuanshuSDK.shared initializeSDKWithConfig:config];
     
     // demo 提供了代理默认实现， 可供参考
     self.defaultDelegate = [[DSUWebViewDefaultDelegate alloc] init];
