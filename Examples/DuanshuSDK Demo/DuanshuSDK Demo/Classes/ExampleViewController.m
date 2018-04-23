@@ -29,7 +29,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // 初始化配置
-    DSUConfig *config = [[DSUConfig alloc] initWithAppId:@"ds31jed4898g36275b0g" appSercet:@"dc3f1cca46a411e89ce5acbc32cb692b"];
+    DSUConfig *config = [[DSUConfig alloc] initWithAppId:@"AppId" appSercet:@"AppSecret"];
     // 初始化SDK
     [DuanshuSDK.shared initializeSDKWithConfig:config];
     
