@@ -15,5 +15,5 @@ target 'DuanshuSDK Demo' do
   # framewok
 #   pod 'DuanshuSDK', path: '../../.'
 
-  pod 'DuanshuSDK', '~> 1.0.3'
+  pod 'DuanshuSDK', '~> 1.0.4'
 end
