@@ -11,6 +11,9 @@
 @interface DuanshuSDK : NSObject
 
 @property (class, readonly, strong) DuanshuSDK *shared;/**< 使用单例访问接口*/
+@property (readonly, copy) NSString *validateSecert;
+@property (readonly, copy) NSString *appSecert;
+
 
 /**
  初始化 SDK.
